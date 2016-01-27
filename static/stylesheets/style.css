@@ -1,0 +1,105 @@
+*{
+	margin:	0px;
+	padding: 0px;
+	font-family: Helvetica, sans-serif;
+}
+.container{
+	width: 470px;
+	margin: 15px auto;
+}
+.all_animals{
+	width: 975px;
+	margin: 15px auto;
+}
+.alignright{
+	float: right;
+	clear: both;
+}
+h3, h2, h1, h4{
+	padding-top: 10px;
+	text-align: center;
+}
+form{
+	display: table;
+	padding: 10px;
+}
+form p{
+	display: table-row;
+}
+form p.label{
+	line-height: 30px;
+}
+label{
+	display: table-cell;
+	padding: 10px 0px;
+	width: 75px;
+}
+select{
+	width: 187px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}
+input, select > option{
+	margin-top: 10px;
+	padding: 5px;
+	display: block;
+	width: 175px;
+}
+input[type="date"]{
+	margin-top: 0px;
+}
+form textarea{
+	vertical-align: top;
+}
+div#more-siblings{
+	display: inline-block;
+}
+button.special{
+	display: block;
+}
+button{
+	padding: 5px;
+	margin-top: 10px;
+	display: inline-block;
+}
+table{
+	margin:	15px auto;
+	width: 100%;
+}
+th{
+	padding: 5px;
+}
+td{
+	outline: 1px solid rgb(128,128,128);
+	padding: 5px;
+}
+ul{
+	list-style-type: none;
+}
+.gender, .breed{
+	text-align: center;
+}
+.name, .name a{
+	font-weight: bold;
+	text-decoration: none;
+}
+img{
+	height: 300px;
+	margin: 0px auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.center{
+	text-align: center;
+	padding-top: 10px;
+}
+.bold{
+	font-weight: bold;
+}
+.cancel{
+	float: right;
+	clear: both;
+	padding: 15px;
+}

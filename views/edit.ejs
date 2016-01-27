@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Edit an Animal</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#name').focus();
+				$(document).on('click','button', function(){
+					$count = $('button#btnAdd').attr('count');
+					$count++;
+					$('input#siblings').clone().attr('id', ($('input#siblings').attr('id') + $count)).val("").appendTo('#more-siblings');
+					$("#siblings" + $count).focus();
+				})
+
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h3>Edit <%= record.name %>'s Record!</h3>
+			<form action="/update_animal/<%= record.id %>" method="post">
+					<input type="text" id="name" name="name" value="<%= record.name %>" placeholder="Name"/>
+					<p class="label">Birth Date:</p>
+					<% 	var bDate = function(dateObj) {
+							var date = dateObj;
+
+							var day = date.getDate() + 1;
+							var m = date.getMonth() + 1;
+							var month = (m < 10) ? ("0" + m) : m
+							var year = date.getFullYear();
+
+							return year + "-" + month + "-" + day;
+						}
+					%>
+					<input type="date" id="bdate" name="bdate" value="<%= bDate(record.birthday) %>"/>
+
+					<select id="gender" name="gender">
+						<option value="null">Select Gender</option>
+						<option value="Female" <% if(record.gender == "Female") { %> selected <% } %>>Female</option>
+						<option value="Male" <% if(record.gender == "Male") { %> selected <% } %>>Male</option>
+					</select>
+					<input type="text" id="breed" name="breed" placeholder="Breed" value="<%= record.breed %>"/>
+					<input type="text" id="park" name="park" placeholder="Resident Park" value="<%= record.park %>"/>
+					<input type="text" id="image" name="image" placeholder="Image Name" value="<%= record.image %>"/>
+					<% if (record.siblings != null ) { 
+						var count = 0;
+						for(idx in record.siblings) {
+							if(idx != '_schema') { 
+								count++;
+								if(idx > 0) { %>
+									<input type="text" id="siblings<%= idx %>" name="sibling[]" placeholder="Sibling Name" value="<%= record.siblings[idx] %>"/>
+							<% } else { %>
+								<input type="text" id="siblings" name="sibling[]" placeholder="Sibling Name" value="<%= record.siblings[idx] %>"/>
+								<% } %>
+							<% } %>
+						<% } %>
+					<% } %>
+					<div id="more-siblings"></div>
+					<button id="btnAdd" type="button" class="special" count="<%= count %>">Add More Siblings</button>
+
+					<a href="/" class="cancel">Cancel</a>
+					<input type="submit" value="Update!"/>
+			</form>
+		</div>
+	</body>
+</html>

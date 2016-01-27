@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Assignment 02 - Mongoose Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="all_animals">
+			<h2>Animals born at the Point Defiance Park Zoo!</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Birthday</th>
+						<th>Gender</th>
+						<th>Breed</th>
+						<th>Resident Park</th>
+						<th>Siblings</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (index in cats) { %>
+						<tr>
+							<td id="<%= cats[index]._id %>" class="name"><a href="/animals/<%= cats[index]._id %>"><%= cats[index].name %></a></td>
+							<td class="birthday">
+								<% 	var bDate = function(dateObj) {
+										var date = dateObj;
+										var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+										var day = date.getDate() + 1;
+										var month = months[date.getMonth()];
+										var year = date.getFullYear();
+
+										return month + " " + day + " " + year;
+									}
+								%>
+
+								<%= bDate(cats[index].birthday) %></td>
+							<td class="gender"><%= cats[index].gender %></td>
+							<td class="breed"><%= cats[index].breed %></td>
+							<td class="park"><%= cats[index].park %></td>
+							<td class="sibling">
+								<% if(cats[index].siblings != null) { %>
+									<ul>
+									<% for( idx in cats[index].siblings) { 
+										if(idx != '_schema') { %>
+										<li><%= cats[index].siblings[idx] %></li>
+									<% } } %>
+									</ul>
+								<% } %>
+							</td>
+							<td>
+								<a href="/animals/<%= cats[index]._id %>/edit">Edit</a> 
+								<a href="/animals/<%= cats[index]._id %>/destroy %>">Delete</a>
+							</td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+			<a href="/animals/new"><button>Add New Animal</button></a>
+		</div>
+	</body>
+</html>

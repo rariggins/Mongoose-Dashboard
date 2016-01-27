@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Add a Cat</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<a href="/" class="alignright">Back</a>
+			<h1>Hi my name is <%= record.name %>!</h1>
+			<image src="/images/<%= record.image %>" class="center"/>
+			<h3>I'm a <%= record.breed %>!</h3>
+
+			<% parseDate = record.birthday
+				var bDate = function(dateObj) {
+					var date = dateObj;
+					var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+					var day = date.getDate();
+					var month = months[date.getMonth()];
+					var year = date.getFullYear();
+
+					return month + " " + day + " " + year;
+				}
+			%>
+
+			<h4>I was born on <%= bDate(parseDate) %>.</h4>
+			<h4>I reside at the <%= record.park %>.</h4>
+			<% if (record.siblings != null ) { 
+				count = record.siblings.length; %>
+				<h4>I have <%= count %> sibling(s) to keep me company.</h4>
+				<h4>They're names are:</h4>
+				<ul class="center">
+					<% for(idx in record.siblings) {
+						if(idx != '_schema') { %>
+							<li class="bold"><%= record.siblings[idx] %></li>
+						<% } %>
+					<% } %>
+				</ul>
+			<% } %>
+		</div>
+	</body>
+</html>

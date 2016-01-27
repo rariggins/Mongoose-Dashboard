@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Add an Animal</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#name').focus();
+				$count = 0;
+				$htmlStr = '';
+				$(document).on('click','button', function(){
+					$count++;
+					$('input#siblings').clone().attr('id', ($('input#siblings').attr('id') + $count)).val("").appendTo('#more-siblings');
+					$("#siblings" + $count).focus();
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<h3>Welcome Add a New Cat!</h3>
+			<form action="/new_animal" method="post">
+					<input type="text" id="name" name="name" placeholder="Name"/>
+					<p class="label">Birth Date:</p>
+					<input type="date" id="bdate" name="bdate" value="Birth Date"/>
+					<select id="gender" name="gender">
+						<option value="null">Select Gender</option>
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+					</select>
+					<input type="text" id="breed" name="breed" placeholder="Breed"/>
+					<input type="text" id="park" name="park" placeholder="Resident Park"/>
+					<input type="text" id="image" name="image" placeholder="Image Name"/>
+					<input type="text" id="siblings" name="sibling[]" placeholder="Sibling Name"/>
+					<div id="more-siblings"></div>
+					<button type="button" class="special">Add More Siblings</button>
+
+					<input type="submit" value="Add a new member!"/>
+			</form>
+		</div>
+	</body>
+</html>
